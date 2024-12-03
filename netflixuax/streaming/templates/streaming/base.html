@@ -18,7 +18,7 @@
                 <li><a href="{% url 'streaming:home' %}" class="nav-link">Inicio</a></li>
                 <li><a href="{% url 'streaming:movies' %}" class="nav-link">Películas</a></li>
                 <li><a href="{% url 'streaming:playlist' %}" class="nav-link">Series</a></li>
-                <li><a href="{% url 'my_account' %}" class="nav-link">Mi Cuenta</a></li>
+                <li><a href="{% url 'authentication:profile' %}" class="nav-link">Mi Cuenta</a></li>
             </ul>
         </nav>
     </header>
@@ -29,7 +29,7 @@
             <div class="banner-content">
                 <h1>Bienvenido a Netflix UAX</h1>
                 <p>Disfruta de las mejores películas y series en alta calidad</p>
-                <a href="{% url 'movies' %}" class="btn btn-primary">Explorar Películas</a>
+                <a href="{% url 'streaming:movies' %}" class="btn btn-primary">Explorar Películas</a>
             </div>
         </section>
 

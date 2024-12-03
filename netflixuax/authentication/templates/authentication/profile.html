@@ -1,0 +1,25 @@
+<!-- authentication/templates/authentication/profile.html -->
+{% extends 'streaming/base.html' %}
+
+{% block title %}
+Mi Perfil - Netflix UAX
+{% endblock %}
+
+{% block content %}
+<h1>Mi Perfil</h1>
+
+<div>
+    <p><strong>Nombre de usuario:</strong> {{ profile.user.username }}</p>
+    <p><strong>Email:</strong> {{ profile.user.email }}</p>
+    <p><strong>Biografía:</strong> {{ profile.bio }}</p>
+    <p><strong>Fecha de nacimiento:</strong> {{ profile.birth_date }}</p>
+    <p><strong>Avatar:</strong></p>
+    {% if profile.avatar %}
+        <img src="{{ profile.avatar.url }}" alt="Avatar" style="width: 150px;">
+    {% else %}
+        <p>No hay avatar.</p>
+    {% endif %}
+</div>
+
+<a href="{% url 'user-profile' %}">Editar Perfil</a>
+{% endblock %}
