@@ -7,11 +7,14 @@ from .serializers import MovieSerializer, PlaylistSerializer, RecommendationSeri
 from django.http import JsonResponse
 from .utils import fetch_popular_movies, fetch_movie_details
 
-
-# Vista Home para plantillas
 def home(request):
     movies = Movie.objects.all()
-    return render(request, 'home.html', {'movies': movies})
+    return render(request, 'streaming/home.html', {'movies': movies})
+
+def movies(request):
+    movies_list = Movie.objects.all()  # Obtiene todas las películas de la base de datos
+    return render(request, 'streaming/movies.html', {'movies': movies_list})
+
 
 # Vistas para la API
 class MovieListView(APIView):
