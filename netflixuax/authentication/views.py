@@ -15,8 +15,8 @@ class UserProfileView(APIView):
         profile = user.profile
         profile.bio = data.get('bio', profile.bio)
         profile.birth_date = data.get('birth_date', profile.birth_date)
-        if 'avatar' in request.FILES:
-            profile.avatar = request.FILES['avatar']
+        """if 'avatar' in request.FILES:
+            profile.avatar = request.FILES['avatar']"""
         profile.save()
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
