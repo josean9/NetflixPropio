@@ -3,6 +3,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 from decouple import config
 
 SECRET_KEY = 'mb37(y8)_s(j1=68eaqm1n$co(*m-fmsm$^y^9m77eq9_64n4&'
