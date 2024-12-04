@@ -1,9 +1,11 @@
 from pathlib import Path
-from decouple import config
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-replace-this-with-your-own-secret-key'
+from decouple import config
+
+SECRET_KEY = 'mb37(y8)_s(j1=68eaqm1n$co(*m-fmsm$^y^9m77eq9_64n4&'
 TMDB_API_KEY = config('TMDB_API_KEY')
 
 
@@ -22,6 +24,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication',
     'streaming',
+    
     
 ]
 
@@ -107,8 +110,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',  # Para usar autenticación por token
-        # 'rest_framework.authentication.SessionAuthentication',  # Para autenticación por sesión (opcional)
+        'rest_framework.authentication.TokenAuthentication',  # Para usar autenticación por token (si es necesario)
+        'rest_framework.authentication.SessionAuthentication',  # Si usas autenticación por sesión
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',  # Solo usuarios autenticados
