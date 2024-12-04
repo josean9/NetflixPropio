@@ -6,4 +6,5 @@ app_name = 'authentication'
 
 urlpatterns = [
     path('profile/', UserProfileView.as_view(), name='profile'),
+    
 ]

@@ -8,12 +8,6 @@ from .serializers import UserSerializer
 class UserProfileView(APIView):
     permission_classes = [IsAuthenticated]  # Solo usuarios autenticados pueden acceder
 
-    def get(self, request):
-        """Obtiene los detalles del perfil del usuario autenticado"""
-        user = request.user
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
-
     def put(self, request):
         """Actualiza el perfil del usuario autenticado"""
         user = request.user
@@ -26,3 +20,12 @@ class UserProfileView(APIView):
         profile.save()
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    def get(self, request):
+        """Obtiene los detalles del perfil del usuario autenticado"""
+        user = request.user
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
+    
