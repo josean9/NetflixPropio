@@ -1,17 +1,21 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.contrib.auth.models import User
+from rest_framework.permissions import IsAuthenticated
 from .models import UserProfile
 from .serializers import UserSerializer
 
 class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]  # Solo usuarios autenticados pueden acceder
+
     def get(self, request):
+        """Obtiene los detalles del perfil del usuario autenticado"""
         user = request.user
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
     def put(self, request):
+        """Actualiza el perfil del usuario autenticado"""
         user = request.user
         data = request.data
         profile = user.profile
