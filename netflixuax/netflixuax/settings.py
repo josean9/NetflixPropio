@@ -99,6 +99,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -118,5 +119,6 @@ REST_FRAMEWORK = {
 }
 
 
-# settings.py
-LOGIN_REDIRECT_URL = '/profile/'  # Cambia a la URL que desees después de login
+
+LOGIN_URL = '/auth/login/'  # Asegúrate de tener una ruta configurada para el login
+LOGIN_REDIRECT_URL = '/'  # Redirige al usuario a la página principal después de iniciar sesión

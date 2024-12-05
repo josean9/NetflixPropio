@@ -1,13 +1,15 @@
 from django.urls import path
-from . import views
-from django.contrib.auth import views as auth_views
+from .views import UserProfileView
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'authentication'
 
 urlpatterns = [
-    path('signup/', views.SignupView.as_view(), name='signup'),
-    path('login/', views.LoginView.as_view(), name='login'),
-    path('logout/', views.LogoutView.as_view(), name='logout'),
-    path('profile/', views.UserProfileHTMLView.as_view(), name='profile'),  
-    path('profile/rest/', views.UserProfileRestView.as_view(), name='profile-rest'),
+    path('profile/', UserProfileView.as_view(), name='profile'),
+    
 ]
+
+# Asegúrate de añadir esta configuración solo en el entorno de desarrollo
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

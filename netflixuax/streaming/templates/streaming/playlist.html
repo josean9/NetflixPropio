@@ -6,7 +6,6 @@ Mi Playlist - Netflix UAX
 
 {% block content %}
 <h1>Mi Playlist</h1>
-
 <section class="playlist-section">
     <h2>Películas</h2>
     <div class="movies-list">
@@ -22,7 +21,6 @@ Mi Playlist - Netflix UAX
             <p>No has añadido películas a tu playlist.</p>
         {% endfor %}
     </div>
-
     <h2>Series</h2>
     <div class="series-list">
         {% for series in playlist.series.all %}
@@ -39,5 +37,5 @@ Mi Playlist - Netflix UAX
     </div>
 </section>
 
-{% endblock %}
 
+{% endblock %}

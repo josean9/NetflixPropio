@@ -11,14 +11,21 @@ Películas - Netflix UAX
         <div class="movie-card">
             <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="movie-img">
             <h3 class="movie-title">{{ movie.title }}</h3>
-            <p class="movie-description">{{ movie.description }}</p>
+            <p class="movie-description" id="description-{{ movie.id }}">
+                {{ movie.description }}
+            </p>
+            <button class="btn-expand" onclick="toggleDescription('description-{{ movie.id }}', this)">Ampliar Descripción</button>
             <p class="release-date">Fecha de estreno: {{ movie.release_date|date:"d M Y" }}</p>
-            <a href="{% url 'streaming:add-to-playlist' movie.id %}" class="btn btn-primary">
-                Añadir a Playlist
-            </a>
+            <a href="{% url 'streaming:add-to-playlist' movie.id %}" class="btn btn-primary">Añadir a Playlist</a>
         </div>
     {% empty %}
         <p>No hay películas disponibles.</p>
     {% endfor %}
+</div>
+
+{% empty %}
+    <p>No hay películas disponibles.</p>
+{% endfor %}
+
 </div>
 {% endblock %}

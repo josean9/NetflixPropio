@@ -11,15 +11,21 @@ Series - Netflix UAX
         <div class="series-card">
             <img src="{{ show.poster_url }}" alt="{{ show.title }}" class="series-img">
             <h3 class="series-title">{{ show.title }}</h3>
-            <p class="series-description">{{ show.description }}</p>
+            <p class="series-description" id="description-{{ show.id }}">
+                {{ show.description }}
+            </p>
+            <button class="btn-expand" onclick="toggleDescription('description-{{ show.id }}', this)">Ampliar Descripción</button>
             <p class="release-date">Fecha de estreno: {{ show.release_date|date:"d M Y" }}</p>
-            <p class="rating">Calificación: {{ show.rating }}</p>
-            <a href="{% url 'streaming:add-series-to-playlist' show.id %}" class="btn btn-primary">
-                Añadir a Playlist
-            </a>
+            <a href="{% url 'streaming:add-series-to-playlist' show.id %}" class="btn btn-primary">Añadir a Playlist</a>
         </div>
     {% empty %}
         <p>No hay series disponibles.</p>
     {% endfor %}
+</div>
+
+{% empty %}
+    <p>No hay series disponibles.</p>
+{% endfor %}
+
 </div>
 {% endblock %}

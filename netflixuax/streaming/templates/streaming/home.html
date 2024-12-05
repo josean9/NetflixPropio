@@ -6,19 +6,24 @@ Inicio - Netflix UAX
 
 {% block content %}
 <h1>Inicio</h1>
-
 <section class="content-section">
     <div class="content-list">
         {% for item in mixed_content %}
             <div class="content-card">
                 <img src="{{ item.poster_url }}" alt="{{ item.title }}" class="content-img">
                 <h3 class="content-title">{{ item.title }}</h3>
-                <p class="content-description">{{ item.description|truncatewords:20 }}</p>
+                <p class="content-description" id="description-{{ item.id }}">
+                    {{ item.description|truncatewords:20 }}
+                </p>
+                <button class="btn-expand" onclick="toggleDescription('description-{{ item.id }}', this)">
+                    Ampliar Descripción
+                </button>
                 <p class="release-date">Fecha de estreno: {{ item.release_date|date:"d M Y" }}</p>
                 <p class="content-type">Tipo: {{ item.content_type }}</p>
             </div>
         {% endfor %}
     </div>
 </section>
+
 
 {% endblock %}

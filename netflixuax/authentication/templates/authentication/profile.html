@@ -12,13 +12,13 @@ Mi Perfil - Netflix UAX
     <p><strong>Email:</strong> {{ profile.user.email }}</p>
     <p><strong>Biografía:</strong> {{ profile.bio }}</p>
     <p><strong>Fecha de nacimiento:</strong> {{ profile.birth_date }}</p>
+    <p><strong>Avatar:</strong></p>
     {% if profile.avatar %}
-        <p><strong>Avatar:</strong></p>
-        <img src="{{ profile.avatar.url }}" alt="Avatar">
+        <img src="{{ profile.avatar.url }}" alt="Avatar" style="width: 150px;">
     {% else %}
-        <p>No hay avatar disponible.</p>
+        <p>No hay avatar.</p>
     {% endif %}
 </div>
 
-<a href="{% url 'profile-rest' %}">Editar Perfil</a>
+<a href="{% url 'user-profile' %}" class="btn btn-primary">Editar Perfil</a>
 {% endblock %}
