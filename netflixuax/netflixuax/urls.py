@@ -8,7 +8,7 @@ urlpatterns = [
     path('', include('streaming.urls')),
     path('auth/', include('authentication.urls')),
   
-    path('profile/', UserProfileView.as_view(), name='profile'),
+    
 
 ]
 
