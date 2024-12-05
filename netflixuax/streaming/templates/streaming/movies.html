@@ -1,4 +1,3 @@
-<!-- streaming/templates/streaming/movies.html -->
 {% extends 'streaming/base.html' %}
 
 {% block title %}
@@ -14,6 +13,9 @@ Películas - Netflix UAX
             <h3 class="movie-title">{{ movie.title }}</h3>
             <p class="movie-description">{{ movie.description }}</p>
             <p class="release-date">Fecha de estreno: {{ movie.release_date|date:"d M Y" }}</p>
+            <a href="{% url 'streaming:add-to-playlist' movie.id %}" class="btn btn-primary">
+                Añadir a Playlist
+            </a>
         </div>
     {% empty %}
         <p>No hay películas disponibles.</p>

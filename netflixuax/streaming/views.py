@@ -7,16 +7,36 @@ from .serializers import MovieSerializer, PlaylistSerializer, RecommendationSeri
 from django.http import JsonResponse
 from .utils import fetch_popular_movies, fetch_movie_details
 
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Movie, Playlist
+
+@login_required
+def add_to_playlist(request, movie_id):
+    playlist, _ = Playlist.objects.get_or_create(user=request.user, name="My Playlist")
+    movie = get_object_or_404(Movie, id=movie_id)
+
+    if movie in playlist.movies.all():
+        playlist.movies.remove(movie)
+    else:
+        playlist.movies.add(movie)
+
+    return redirect('streaming:movies')
+
+@login_required
+def playlist(request):
+    playlist, _ = Playlist.objects.get_or_create(user=request.user, name="My Playlist")
+    return render(request, 'streaming/playlist.html', {'playlist': playlist})
+
+
 def home(request):
     movies = Movie.objects.all()
     return render(request, 'streaming/home.html', {'movies': movies})
 
 def movies(request):
-    movies_list = Movie.objects.all()  # Obtiene todas las películas de la base de datos
+    movies_list = Movie.objects.all()
     return render(request, 'streaming/movies.html', {'movies': movies_list})
 
-
-# Vistas para la API
 class MovieListView(APIView):
     def get(self, request):
         movies = Movie.objects.all()
@@ -57,10 +77,7 @@ class RecommendationView(APIView):
         except Recommendation.DoesNotExist:
             return Response({"message": "No recommendations found."}, status=status.HTTP_404_NOT_FOUND)
 
-
-
 def popular_movies(request):
-    """Vista para obtener películas populares."""
     try:
         data = fetch_popular_movies()
         return JsonResponse(data, safe=False)
@@ -68,10 +85,8 @@ def popular_movies(request):
         return JsonResponse({'error': str(e)}, status=500)
 
 def movie_details(request, movie_id):
-    """Vista para obtener detalles de una película."""
     try:
         data = fetch_movie_details(movie_id)
         return JsonResponse(data, safe=False)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
-

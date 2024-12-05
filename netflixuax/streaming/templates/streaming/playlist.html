@@ -1,23 +1,24 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>My Playlists</title>
-</head>
-<body>
-    <h1>My Playlists</h1>
-    <div>
-        {% for playlist in playlists %}
-            <div>
-                <h2>{{ playlist.name }}</h2>
-                <p>Created At: {{ playlist.created_at }}</p>
-                <ul>
-                    {% for movie in playlist.movies %}
-                        <li>{{ movie.title }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endfor %}
-    </div>
-</body>
-</html>
+{% extends 'streaming/base.html' %}
+
+{% block title %}
+Mi Playlist - Netflix UAX
+{% endblock %}
+
+{% block content %}
+<h1>Mi Playlist</h1>
+<div class="movies-list">
+    {% for movie in playlist.movies.all %}
+        <div class="movie-card">
+            <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="movie-img">
+            <h3 class="movie-title">{{ movie.title }}</h3>
+            <p class="movie-description">{{ movie.description }}</p>
+            <p class="release-date">Fecha de estreno: {{ movie.release_date|date:"d M Y" }}</p>
+            <a href="{% url 'streaming:add-to-playlist' movie.id %}" class="btn btn-danger">
+                Eliminar de Playlist
+            </a>
+        </div>
+    {% empty %}
+        <p>No has añadido películas a tu playlist.</p>
+    {% endfor %}
+</div>
+{% endblock %}

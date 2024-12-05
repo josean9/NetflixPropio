@@ -4,60 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Netflix UAX{% endblock %}</title>
-    
-    <!-- Cargar el tag estático -->
     {% load static %}
-
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body class="bg-dark text-light">
-    <!-- Header Section -->
-    <header class="header">
-        <nav class="nav">
-            <ul class="nav-links">
+    <header>
+        <nav>
+            <ul>
                 <li><a href="{% url 'streaming:home' %}" class="nav-link">Inicio</a></li>
                 <li><a href="{% url 'streaming:movies' %}" class="nav-link">Películas</a></li>
-                <li><a href="{% url 'streaming:playlist' %}" class="nav-link">Series</a></li>
+                <li><a href="{% url 'streaming:playlist' %}" class="nav-link">Mi Playlist</a></li>
                 <li><a href="{% url 'authentication:profile' %}" class="nav-link">Mi Cuenta</a></li>
-
             </ul>
         </nav>
     </header>
-
-    <!-- Main Content Section -->
-    <main class="main-content">
-        <section class="banner">
-            <div class="banner-content">
-                <h1>Bienvenido a Netflix UAX</h1>
-                <p>Disfruta de las mejores películas y series en alta calidad</p>
-                <a href="{% url 'streaming:movies' %}" class="btn btn-primary">Explorar Películas</a>
-            </div>
-        </section>
-
-        <section class="movies-section">
-            <h2>Películas Populares</h2>
-            <div class="movies-list">
-                {% for movie in movies %}
-                    <div class="movie-card">
-                        <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="movie-img">
-                        <div class="movie-info">
-                            <h3 class="movie-title">{{ movie.title }}</h3>
-                            <p class="movie-description">{{ movie.description|truncatewords:20 }}</p>
-                            <p class="release-date">Fecha de estreno: {{ movie.release_date|date:"d M Y" }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </section>
+    <main>
+        {% block content %}
+        {% endblock %}
     </main>
-
-    <!-- Footer Section -->
-    <footer class="footer">
-        <p class="footer-text">&copy; 2023 Netflix UAX. Todos los derechos reservados.</p>
-        <div class="footer-links">
-            <a href="#" class="footer-link">Términos de uso</a>
-            <a href="#" class="footer-link">Política de privacidad</a>
-        </div>
+    <footer>
+        <p>&copy; 2024 Netflix UAX. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>

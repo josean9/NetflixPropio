@@ -19,5 +19,3 @@ class RecommendationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recommendation
         fields = ['id', 'user', 'recommended_movies']
-
-

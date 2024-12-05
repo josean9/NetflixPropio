@@ -108,13 +108,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',  # Para usar autenticación por token (si es necesario)
-        'rest_framework.authentication.SessionAuthentication',  # Si usas autenticación por sesión
+        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',  # Solo usuarios autenticados
+        'rest_framework.permissions.IsAuthenticated',
     ],
 }
+
+
+# settings.py
+LOGIN_REDIRECT_URL = '/profile/'  # Cambia a la URL que desees después de login
