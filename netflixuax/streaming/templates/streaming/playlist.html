@@ -6,19 +6,38 @@ Mi Playlist - Netflix UAX
 
 {% block content %}
 <h1>Mi Playlist</h1>
-<div class="movies-list">
-    {% for movie in playlist.movies.all %}
-        <div class="movie-card">
-            <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="movie-img">
-            <h3 class="movie-title">{{ movie.title }}</h3>
-            <p class="movie-description">{{ movie.description }}</p>
-            <p class="release-date">Fecha de estreno: {{ movie.release_date|date:"d M Y" }}</p>
-            <a href="{% url 'streaming:add-to-playlist' movie.id %}" class="btn btn-danger">
-                Eliminar de Playlist
-            </a>
-        </div>
-    {% empty %}
-        <p>No has añadido películas a tu playlist.</p>
-    {% endfor %}
-</div>
+
+<section class="playlist-section">
+    <h2>Películas</h2>
+    <div class="movies-list">
+        {% for movie in playlist.movies.all %}
+            <div class="movie-card">
+                <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" class="movie-img">
+                <h3 class="movie-title">{{ movie.title }}</h3>
+                <a href="{% url 'streaming:add-to-playlist' movie.id %}" class="btn btn-danger">
+                    Eliminar de Playlist
+                </a>
+            </div>
+        {% empty %}
+            <p>No has añadido películas a tu playlist.</p>
+        {% endfor %}
+    </div>
+
+    <h2>Series</h2>
+    <div class="series-list">
+        {% for series in playlist.series.all %}
+            <div class="series-card">
+                <img src="{{ series.poster_url }}" alt="{{ series.title }}" class="series-img">
+                <h3 class="series-title">{{ series.title }}</h3>
+                <a href="{% url 'streaming:add-series-to-playlist' series.id %}" class="btn btn-danger">
+                    Eliminar de Playlist
+                </a>
+            </div>
+        {% empty %}
+            <p>No has añadido series a tu playlist.</p>
+        {% endfor %}
+    </div>
+</section>
+
 {% endblock %}
+

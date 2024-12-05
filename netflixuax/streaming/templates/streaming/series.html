@@ -1,0 +1,25 @@
+{% extends 'streaming/base.html' %}
+
+{% block title %}
+Series - Netflix UAX
+{% endblock %}
+
+{% block content %}
+<h1>Series</h1>
+<div class="series-list">
+    {% for show in tv_shows %}
+        <div class="series-card">
+            <img src="{{ show.poster_url }}" alt="{{ show.title }}" class="series-img">
+            <h3 class="series-title">{{ show.title }}</h3>
+            <p class="series-description">{{ show.description }}</p>
+            <p class="release-date">Fecha de estreno: {{ show.release_date|date:"d M Y" }}</p>
+            <p class="rating">Calificación: {{ show.rating }}</p>
+            <a href="{% url 'streaming:add-series-to-playlist' show.id %}" class="btn btn-primary">
+                Añadir a Playlist
+            </a>
+        </div>
+    {% empty %}
+        <p>No hay series disponibles.</p>
+    {% endfor %}
+</div>
+{% endblock %}

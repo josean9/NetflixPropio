@@ -11,11 +11,27 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
+    
+   
+
+class Series(models.Model):
+    tmdb_id = models.IntegerField(unique=True)
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    release_date = models.DateField(blank=True, null=True)
+    poster_url = models.URLField(blank=True, null=True)
+    backdrop_url = models.URLField(blank=True, null=True)
+    rating = models.FloatField(default=0)
+
+    def __str__(self):
+        return self.title
+
 
 class Playlist(models.Model):
     name = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='playlists')
     movies = models.ManyToManyField(Movie, related_name='playlists')
+    series = models.ManyToManyField(Series, related_name='playlists')  
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

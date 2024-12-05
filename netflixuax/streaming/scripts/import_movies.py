@@ -1,7 +1,7 @@
 import requests
 from streaming.models import Movie
 
-API_KEY = "c2dc323ab66e5495c27791ea6469e55e"
+API_KEY = "b1c4ff670df4325eb0457288933bd696"
 
 def fetch_and_store_movies():
     url = f"https://api.themoviedb.org/3/movie/popular?api_key={API_KEY}&language=en-US&page=1"

@@ -19,3 +19,11 @@ def fetch_popular_movies():
 
 def fetch_movie_details(movie_id):
     return fetch_movies_from_tmdb(f'movie/{movie_id}')
+
+# Función para obtener series populares
+def fetch_popular_tv_shows():
+    return fetch_movies_from_tmdb('tv/popular')
+
+# Función para obtener los detalles de una serie
+def fetch_tv_show_details(tv_id):
+    return fetch_movies_from_tmdb(f'tv/{tv_id}')
