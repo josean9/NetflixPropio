@@ -1,0 +1,33 @@
+{% extends 'streaming/base.html' %}
+
+{% block title %}
+Editar Perfil - Netflix UAX
+{% endblock %}
+
+{% block content %}
+<h1 style="color: #e50914; text-align: center; margin-bottom: 30px;">Editar Perfil</h1>
+
+<form method="post" enctype="multipart/form-data" style="max-width: 500px; margin: 0 auto; background-color: #222; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
+    {% csrf_token %}
+    <div style="margin-bottom: 15px;">
+        <label for="id_bio" style="color: #fff; font-weight: bold; display: block; margin-bottom: 5px;">Biografía:</label>
+        <textarea id="id_bio" name="bio" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #555; background-color: #333; color: #fff; resize: none;">{{ form.bio.value }}</textarea>
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="id_avatar" style="color: #fff; font-weight: bold; display: block; margin-bottom: 5px;">Avatar:</label>
+        <input id="id_avatar" type="file" name="avatar" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #555; background-color: #333; color: #fff;">
+    </div>
+    <div style="margin-bottom: 15px;">
+        <label for="id_birth_date" style="color: #fff; font-weight: bold; display: block; margin-bottom: 5px;">Fecha de Nacimiento:</label>
+        <input id="id_birth_date" type="date" name="birth_date" value="{{ form.birth_date.value }}" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #555; background-color: #333; color: #fff;">
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+        <button type="submit" class="btn btn-primary" style="padding: 10px 20px; background-color: #e50914; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; transition: background-color 0.3s;">
+            Guardar Cambios
+        </button>
+        <a href="{% url 'authentication:profile' %}" class="btn btn-danger" style="padding: 10px 20px; background-color: #333; color: #e50914; border: 1px solid #e50914; border-radius: 5px; text-decoration: none; font-weight: bold; transition: background-color 0.3s, color 0.3s;">
+            Cancelar
+        </a>
+    </div>
+</form>
+{% endblock %}

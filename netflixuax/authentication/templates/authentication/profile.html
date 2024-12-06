@@ -5,20 +5,26 @@ Mi Perfil - Netflix UAX
 {% endblock %}
 
 {% block content %}
-<h1>Mi Perfil</h1>
+<div style="max-width: 600px; margin: 20px auto; padding: 20px; background-color: #222; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); text-align: center;">
+    <h1 style="color: #e50914; font-size: 2rem; margin-bottom: 20px;">Mi Perfil</h1>
 
-<div>
-    <p><strong>Nombre de usuario:</strong> {{ profile.user.username }}</p>
-    <p><strong>Email:</strong> {{ profile.user.email }}</p>
-    <p><strong>Biografía:</strong> {{ profile.bio }}</p>
-    <p><strong>Fecha de nacimiento:</strong> {{ profile.birth_date }}</p>
-    <p><strong>Avatar:</strong></p>
-    {% if profile.avatar %}
-        <img src="{{ profile.avatar.url }}" alt="Avatar" style="width: 150px;">
-    {% else %}
-        <p>No hay avatar.</p>
-    {% endif %}
+    <div style="margin-bottom: 20px;">
+        {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" alt="Avatar" style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #e50914; margin-bottom: 20px;">
+        {% else %}
+            <div style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #e50914; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; color: #fff; background-color: #333;">
+                No Avatar
+            </div>
+        {% endif %}
+    </div>
+    
+    <p style="color: #fff; font-size: 1.2rem;"><strong>Nombre de usuario:</strong> {{ profile.user.username }}</p>
+    <p style="color: #ccc; font-size: 1rem;"><strong>Email:</strong> {{ profile.user.email }}</p>
+    <p style="color: #ccc; font-size: 1rem;"><strong>Biografía:</strong> {{ profile.bio }}</p>
+    <p style="color: #ccc; font-size: 1rem;"><strong>Fecha de nacimiento:</strong> {{ profile.birth_date|date:"j F Y" }}</p>
+
+    <a href="{% url 'authentication:edit-profile' %}" style="display: inline-block; padding: 10px 20px; background-color: #e50914; color: #fff; text-decoration: none; border-radius: 4px; font-weight: bold; transition: background-color 0.3s ease;">
+        Editar Perfil
+    </a>
 </div>
-
-<a href="{% url 'authentication:edit-profile' %}" class="btn btn-primary">Editar Perfil</a>
 {% endblock %}

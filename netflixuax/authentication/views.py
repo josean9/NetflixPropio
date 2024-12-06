@@ -4,10 +4,40 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from .models import UserProfile
 from .serializers import UserSerializer
-
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile
+from django.shortcuts import render, redirect
+from django.utils.decorators import method_decorator
+from django.views import View
+from .models import UserProfile
+from .forms import UserProfileForm  # Asegúrate de crear un formulario
+
+@method_decorator(login_required, name='dispatch')
+class EditProfileView(View):
+    """Vista para editar el perfil del usuario"""
+    def get(self, request):
+        user = request.user
+        try:
+            profile = user.profile
+        except UserProfile.DoesNotExist:
+            profile = None  # Caso donde no hay perfil aún
+
+        form = UserProfileForm(instance=profile)
+        return render(request, 'authentication/edit_profile.html', {'form': form})
+
+    def post(self, request):
+        user = request.user
+        try:
+            profile = user.profile
+        except UserProfile.DoesNotExist:
+            profile = UserProfile(user=user)
+
+        form = UserProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('authentication:profile')
+        return render(request, 'authentication/edit_profile.html', {'form': form})
+
 
 @login_required
 def profile(request):
