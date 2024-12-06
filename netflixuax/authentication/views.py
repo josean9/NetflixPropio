@@ -38,6 +38,44 @@ class EditProfileView(View):
             return redirect('authentication:profile')
         return render(request, 'authentication/edit_profile.html', {'form': form})
 
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
+
+# Vista para Login
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')  # Cambia 'home' por la ruta a tu página principal
+        else:
+            messages.error(request, 'Usuario o contraseña incorrectos.')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'authentication/login.html', {'form': form})
+
+# Vista para Signup
+def signup_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # Loguea automáticamente al usuario después del registro
+            return redirect('home')  # Cambia 'home' por la ruta a tu página principal
+        else:
+            messages.error(request, 'Error al crear la cuenta. Por favor, revisa los datos.')
+    else:
+        form = UserCreationForm()
+    return render(request, 'authentication/signup.html', {'form': form})
+
+# Vista para Logout
+def logout_view(request):
+    logout(request)
+    return redirect('login')  # Redirige al login después de cerrar sesión
+
 
 @login_required
 def profile(request):
