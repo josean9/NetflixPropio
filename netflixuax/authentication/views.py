@@ -50,7 +50,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('home')  # Cambia 'home' por la ruta a tu página principal
+            return redirect('authentication:profile')  # Cambia 'home' por la ruta a tu página principal
         else:
             messages.error(request, 'Usuario o contraseña incorrectos.')
     else:
@@ -74,7 +74,7 @@ def signup_view(request):
 # Vista para Logout
 def logout_view(request):
     logout(request)
-    return redirect('login')  # Redirige al login después de cerrar sesión
+    return redirect('authentication:login')  # Redirige al login después de cerrar sesión
 
 
 @login_required

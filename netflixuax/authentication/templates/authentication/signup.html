@@ -3,11 +3,19 @@
 {% block title %}Registrarse - Netflix UAX{% endblock %}
 
 {% block content %}
-<h1>Crear Cuenta</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Crear Cuenta</button>
-</form>
-<p>¿Ya tienes una cuenta? <a href="{% url 'authentication:login' %}">Inicia Sesión aquí</a></p>
+<div style="max-width: 600px; margin: 50px auto; padding: 20px; background-color: #222; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
+    <h1 style="color: #e50914; font-size: 2.5rem; text-align: center; margin-bottom: 30px;">Crear Cuenta</h1>
+    <form method="post" style="display: flex; flex-direction: column; gap: 20px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="padding: 12px 20px; background-color: #e50914; color: #fff; border: none; border-radius: 4px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: background-color 0.3s ease;">
+            Crear Cuenta
+        </button>
+    </form>
+    <p style="color: #ccc; font-size: 1rem; text-align: center; margin-top: 20px;">¿Ya tienes una cuenta? 
+        <a href="{% url 'authentication:login' %}" style="color: #e50914; text-decoration: none; font-weight: bold;">
+            Inicia Sesión aquí
+        </a>
+    </p>
+</div>
 {% endblock %}
