@@ -5,6 +5,24 @@ from rest_framework.permissions import IsAuthenticated
 from .models import UserProfile
 from .serializers import UserSerializer
 
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from .models import UserProfile
+
+@login_required
+def profile(request):
+    """Muestra el perfil del usuario autenticado."""
+    user = request.user
+    try:
+        profile = user.profile
+    except UserProfile.DoesNotExist:
+        profile = None  # Si el perfil no existe, maneja este caso
+
+    return render(request, 'authentication/profile.html', {'profile': profile})
+
+
+
+
 class UserProfileView(APIView):
     permission_classes = [IsAuthenticated]  # Solo usuarios autenticados pueden acceder
 

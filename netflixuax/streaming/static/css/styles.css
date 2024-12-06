@@ -71,37 +71,75 @@ main div {
     gap: 20px;
 }
 
-main div > div {
+/* Estilo para las tarjetas con alturas uniformes */
+.content-card, .movie-card, .series-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 250px;
     background-color: #333;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 450px; /* Altura mínima */
+    height: auto; /* Ajuste dinámico */
+    padding: 10px; /* Espaciado interno */
 }
 
-main div > div:hover {
+.content-card:hover, .movie-card:hover, .series-card:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
 }
 
-main div img {
+/* Estilo para las imágenes */
+.content-card img, .movie-card img, .series-card img {
     width: 100%;
     height: auto;
+    max-height: 180px; /* Limitar altura de las imágenes */
+    object-fit: cover;
     border-bottom: 4px solid #e50914;
 }
 
-main div h3 {
-    padding: 15px 10px;
-    background-color: #222;
-    font-size: 1.4rem;
+/* Estilo para los títulos */
+.content-card h3, .movie-card h3, .series-card h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
     color: #fff;
+    text-align: center;
 }
 
-main div p {
-    padding: 10px;
-    font-size: 1rem;
+/* Estilo para las descripciones con truncado */
+.content-description, .movie-description, .series-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limitar a 3 líneas */
+    -webkit-box-orient: vertical;
+    height: auto;
+    margin: 10px 0;
     color: #ccc;
+    font-size: 0.9rem;
+    text-align: justify;
+}
+
+.content-description.expanded, .movie-description.expanded, .series-description.expanded {
+    height: auto; /* Expande la altura */
+}
+
+/* Botón de expansión de descripción */
+.btn-expand {
+    background-color: transparent;
+    color: #e50914;
+    border: none;
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+.btn-expand:hover {
+    color: #b0060f;
 }
 
 /* Estilo para los botones */
@@ -138,6 +176,15 @@ main div p {
     color: #fff;
 }
 
+/* Contenedor de las tarjetas */
+.movies-list, .series-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centrar las tarjetas */
+    gap: 20px; /* Espaciado entre tarjetas */
+    padding: 20px;
+}
+
 /* Estilo para el footer */
 footer {
     background-color: #111;
@@ -166,49 +213,4 @@ footer p {
     main div > div {
         width: 90%;
     }
-}
-/* Estilo para las tarjetas con alturas uniformes */
-.content-card, .movie-card, .series-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 250px;
-    background-color: #333;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 450px; /* Altura fija */
-}
-
-.content-card:hover, .movie-card:hover, .series-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
-}
-
-.content-description, .movie-description, .series-description {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    height: 60px; /* Altura para 2-3 líneas de texto */
-    margin: 10px;
-    color: #ccc;
-}
-
-.content-description.expanded, .movie-description.expanded, .series-description.expanded {
-    height: auto; /* Expande la altura */
-}
-
-/* Estilo para el botón de ampliar descripción */
-.btn-expand {
-    background-color: transparent;
-    color: #e50914;
-    border: none;
-    font-size: 14px;
-    text-decoration: underline;
-    cursor: pointer;
-    margin: 10px;
-}
-
-.btn-expand:hover {
-    color: #b0060f;
 }
