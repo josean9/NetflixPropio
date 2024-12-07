@@ -13,7 +13,7 @@ urlpatterns = [
     path('', profile, name='profile'),  # Página principal del perfil
     path('profile/edit/', EditProfileView.as_view(), name='edit-profile'),
     
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 
 

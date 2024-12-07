@@ -5,25 +5,36 @@ Inicio - Netflix UAX
 {% endblock %}
 
 {% block content %}
-<h1>Inicio</h1>
-<section class="content-section">
-    <div class="content-list">
-        {% for item in mixed_content %}
-            <div class="content-card">
-                <img src="{{ item.poster_url }}" alt="{{ item.title }}" class="content-img">
-                <h3 class="content-title">{{ item.title }}</h3>
-                <p class="content-description" id="description-{{ item.id }}">
-                    {{ item.description|truncatewords:20 }}
-                </p>
-                <button class="btn-expand" onclick="toggleDescription('description-{{ item.id }}', this)">
-                    Ampliar Descripción
-                </button>
-                <p class="release-date">Fecha de estreno: {{ item.release_date|date:"d M Y" }}</p>
-                <p class="content-type">Tipo: {{ item.content_type }}</p>
+<h1 style="color: #e50914; text-align: center;">Tendencias</h1>
+
+<div style="margin: 20px;">
+    <h2 style="color: #e50914;">Películas</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+        {% for movie in trending_movies %}
+            <div style="width: 250px; background-color: #222; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
+                <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" style="width: 100%; height: auto;">
+                <div style="padding: 10px; color: #fff;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 10px;">{{ movie.title }}</h3>
+                    <p style="font-size: 0.9rem;">Fecha de estreno: {{ movie.release_date|date:"d M Y" }}</p>
+                </div>
             </div>
         {% endfor %}
     </div>
-</section>
+</div>
 
-
+<div style="margin: 20px;">
+    <h2 style="color: #e50914;">Series</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+        {% for series in trending_series %}
+            <div style="width: 250px; background-color: #222; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
+                <img src="{{ series.poster_url }}" alt="{{ series.title }}" style="width: 100%; height: auto;">
+                <div style="padding: 10px; color: #fff;">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 10px;">{{ series.title }}</h3>
+                    <p style="font-size: 0.9rem;">Fecha de estreno: {{ series.release_date|date:"d M Y" }}</p>
+                    <p style="font-size: 0.9rem;">Rating: {{ series.rating }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

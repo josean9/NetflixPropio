@@ -7,6 +7,9 @@ from .utils import *
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Movie, Playlist, Recommendation, Series
+from itertools import chain
+from datetime import datetime, timedelta
+from django.db.models import Q
 
 @login_required
 def add_to_playlist(request, movie_id):
@@ -38,28 +41,30 @@ def playlist(request):
     playlist, _ = Playlist.objects.get_or_create(user=request.user, name="My Playlist")
     return render(request, 'streaming/playlist.html', {'playlist': playlist})
 
-from itertools import chain
+
 
 def home(request):
-    """
-    Vista de inicio que mezcla películas y series.
-    """
-    movies = Movie.objects.all()
-    tv_shows = Series.objects.all()
 
-    # Agregar un campo 'content_type' a cada elemento
-    for movie in movies:
-        movie.content_type = "Película"
-    for tv_show in tv_shows:
-        tv_show.content_type = "Serie"
+    # Filtrar películas "actuales" (últimos 5 años)
+    five_years_ago = datetime.now().date() - timedelta(days=5 * 365)
+    trending_movies = Movie.objects.filter(release_date__gte=five_years_ago).order_by('-release_date')[:10]
 
-    # Mezclar películas y series
-    mixed_content = sorted(
-        chain(movies, tv_shows),
-        key=lambda x: x.release_date if x.release_date else ""
-    )
-    return render(request, 'streaming/home.html', {'mixed_content': mixed_content})
+    # Filtrar series con buen rating (mayor a 7.0) y recientes
+    trending_series = Series.objects.filter(
+        Q(release_date__gte=five_years_ago) & Q(rating__gte=7.0)
+    ).order_by('-rating')[:10]
 
+    # Filtrar películas de familia por palabra clave (ajusta según tus datos)
+    family_movies = Movie.objects.filter(
+        Q(genre__icontains="familia") | Q(title__icontains="familia")
+    ).order_by('-release_date')[:10]
+
+    context = {
+        'trending_movies': trending_movies,
+        'trending_series': trending_series,
+        'family_movies': family_movies,
+    }
+    return render(request, 'streaming/home.html', context)
 
 def movies(request):
     movies_list = Movie.objects.all()
