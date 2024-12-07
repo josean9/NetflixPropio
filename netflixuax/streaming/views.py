@@ -43,28 +43,25 @@ def playlist(request):
 
 
 
+from streaming.models import Movie, Series
+
+from django.shortcuts import render
+from .models import Movie, Series
+
 def home(request):
-
-    # Filtrar películas "actuales" (últimos 5 años)
-    five_years_ago = datetime.now().date() - timedelta(days=5 * 365)
-    trending_movies = Movie.objects.filter(release_date__gte=five_years_ago).order_by('-release_date')[:10]
-
-    # Filtrar series con buen rating (mayor a 7.0) y recientes
-    trending_series = Series.objects.filter(
-        Q(release_date__gte=five_years_ago) & Q(rating__gte=7.0)
-    ).order_by('-rating')[:10]
-
-    # Filtrar películas de familia por palabra clave (ajusta según tus datos)
-    family_movies = Movie.objects.filter(
-        Q(genre__icontains="familia") | Q(title__icontains="familia")
-    ).order_by('-release_date')[:10]
+    trending_movies = Movie.objects.order_by('-release_date')[:10]  # Ejemplo: Películas recientes
+    trending_series = Series.objects.order_by('-release_date')[:10]  # Ejemplo: Series recientes
+    recent_movies = Movie.objects.order_by('-release_date')[:10]  # Películas recientes
+    top_rated_series = Series.objects.order_by('-rating')[:10]  # Series con mejores valoraciones
 
     context = {
         'trending_movies': trending_movies,
         'trending_series': trending_series,
-        'family_movies': family_movies,
+        'recent_movies': recent_movies,
+        'top_rated_series': top_rated_series,
     }
     return render(request, 'streaming/home.html', context)
+
 
 def movies(request):
     movies_list = Movie.objects.all()

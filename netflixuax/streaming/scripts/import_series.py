@@ -19,6 +19,7 @@ def fetch_and_store_tv_shows():
                         'title': tv_data['name'],
                         'description': tv_data['overview'],
                         'release_date': tv_data.get('first_air_date', None),
+                        
                         'poster_url': f"https://image.tmdb.org/t/p/w500{tv_data['poster_path']}" if tv_data.get('poster_path') else None,
                         'backdrop_url': f"https://image.tmdb.org/t/p/w500{tv_data['backdrop_path']}" if tv_data.get('backdrop_path') else None,
                         'rating': tv_data.get('vote_average', 0),

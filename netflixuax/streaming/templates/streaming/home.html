@@ -8,14 +8,14 @@ Inicio - Netflix UAX
 <h1 style="color: #e50914; text-align: center;">Tendencias</h1>
 
 <div style="margin: 20px;">
-    <h2 style="color: #e50914;">Películas</h2>
-    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+    <h2 style="color: #e50914;">Películas en Tendencia</h2>
+    <div style="overflow-x: auto; white-space: nowrap; padding: 10px; scrollbar-width: thin;">
         {% for movie in trending_movies %}
-            <div style="width: 250px; background-color: #222; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
+            <div style="display: inline-block; width: 200px; margin-right: 15px; background-color: #222; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
                 <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" style="width: 100%; height: auto;">
-                <div style="padding: 10px; color: #fff;">
-                    <h3 style="font-size: 1.2rem; margin-bottom: 10px;">{{ movie.title }}</h3>
-                    <p style="font-size: 0.9rem;">Fecha de estreno: {{ movie.release_date|date:"d M Y" }}</p>
+                <div style="padding: 10px; color: #fff; text-align: center;">
+                    <h3 style="font-size: 1rem; margin-bottom: 10px;">{{ movie.title }}</h3>
+                    <p style="font-size: 0.8rem;">Estreno: {{ movie.release_date|date:"d M Y" }}</p>
                 </div>
             </div>
         {% endfor %}
@@ -23,15 +23,45 @@ Inicio - Netflix UAX
 </div>
 
 <div style="margin: 20px;">
-    <h2 style="color: #e50914;">Series</h2>
-    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+    <h2 style="color: #e50914;">Series en Tendencia</h2>
+    <div style="overflow-x: auto; white-space: nowrap; padding: 10px; scrollbar-width: thin;">
         {% for series in trending_series %}
-            <div style="width: 250px; background-color: #222; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
+            <div style="display: inline-block; width: 200px; margin-right: 15px; background-color: #222; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
                 <img src="{{ series.poster_url }}" alt="{{ series.title }}" style="width: 100%; height: auto;">
-                <div style="padding: 10px; color: #fff;">
-                    <h3 style="font-size: 1.2rem; margin-bottom: 10px;">{{ series.title }}</h3>
-                    <p style="font-size: 0.9rem;">Fecha de estreno: {{ series.release_date|date:"d M Y" }}</p>
-                    <p style="font-size: 0.9rem;">Rating: {{ series.rating }}</p>
+                <div style="padding: 10px; color: #fff; text-align: center;">
+                    <h3 style="font-size: 1rem; margin-bottom: 10px;">{{ series.title }}</h3>
+                    <p style="font-size: 0.8rem;">Estreno: {{ series.release_date|date:"d M Y" }}</p>
+                    <p style="font-size: 0.8rem;">Rating: {{ series.rating }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div style="margin: 20px;">
+    <h2 style="color: #e50914;">Películas Recientes</h2>
+    <div style="overflow-x: auto; white-space: nowrap; padding: 10px; scrollbar-width: thin;">
+        {% for movie in recent_movies %}
+            <div style="display: inline-block; width: 200px; margin-right: 15px; background-color: #222; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
+                <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" style="width: 100%; height: auto;">
+                <div style="padding: 10px; color: #fff; text-align: center;">
+                    <h3 style="font-size: 1rem; margin-bottom: 10px;">{{ movie.title }}</h3>
+                    <p style="font-size: 0.8rem;">Estreno: {{ movie.release_date|date:"d M Y" }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div style="margin: 20px;">
+    <h2 style="color: #e50914;">Series con Mejores Valoraciones</h2>
+    <div style="overflow-x: auto; white-space: nowrap; padding: 10px; scrollbar-width: thin;">
+        {% for series in top_rated_series %}
+            <div style="display: inline-block; width: 200px; margin-right: 15px; background-color: #222; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
+                <img src="{{ series.poster_url }}" alt="{{ series.title }}" style="width: 100%; height: auto;">
+                <div style="padding: 10px; color: #fff; text-align: center;">
+                    <h3 style="font-size: 1rem; margin-bottom: 10px;">{{ series.title }}</h3>
+                    <p style="font-size: 0.8rem;">Rating: {{ series.rating }}</p>
                 </div>
             </div>
         {% endfor %}
