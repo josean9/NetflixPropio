@@ -7,11 +7,21 @@ Snake Game - Netflix UAX
 
 {% block content %}
 <h1 style="text-align: center; color: #e50914;">Snake Game</h1>
-<div id="snake-game-container" style="display: flex; justify-content: center; align-items: center;">
-    <!-- El canvas debe estar definido y tener el ID esperado por el JS -->
-    <canvas id="gameCanvas" width="500" height="500" style="border: 2px solid #e50914; background-color: #000;"></canvas>
+<div style="text-align: center; margin-bottom: 10px;">
+  <span id="currentScore" style="color: white; font-size: 20px;">Puntos: 0</span>
+  <span id="highScore" style="color: white; font-size: 20px; margin-left: 20px;">Récord: 0</span>
+</div>
+<div style="text-align: center; margin-bottom: 10px;">
+  <label for="foodColorSelector" style="color: white; font-size: 16px;">Color de comida:</label>
+  <input id="foodColorSelector" type="color" value="#00ff00" />
+</div>
+<div id="snake-game-container" style="margin: auto; width: 520px; height: 520px; border: 6px solid #fff; background-color: #000;">
+    <canvas id="gameCanvas" width="500" height="500"></canvas>
 </div>
 
-<!-- Incluye el archivo JavaScript correctamente -->
+<button id="restartButton" style="display: none; margin: 20px auto; display: block; padding: 10px 20px; background-color: #e50914; color: #fff; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+  Volver a jugar
+</button>
+
 <script src="{% static 'snake/js/snake.js' %}"></script>
 {% endblock %}
