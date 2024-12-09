@@ -1,0 +1,13 @@
+{% extends 'streaming/base.html' %}
+
+{% block title %}
+Snake Game - Netflix UAX
+{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center; color: #e50914;">Snake Game</h1>
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+    <canvas id="gameCanvas" width="400" height="400" style="border: 1px solid #000;"></canvas>
+</div>
+<script src="{% static 'snake/snake.js' %}"></script>
+{% endblock %}
