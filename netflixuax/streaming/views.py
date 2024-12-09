@@ -63,6 +63,23 @@ def home(request):
     return render(request, 'streaming/home.html', context)
 
 
+def search_movies(request):
+    query = request.GET.get('q', '')
+    if query:
+        movies = Movie.objects.filter(title__icontains=query)
+    else:
+        movies = Movie.objects.all()
+    return render(request, 'streaming/movies.html', {'movies': movies, 'query': query})
+
+def search_series(request):
+    query = request.GET.get('q', '')
+    if query:
+        tv_shows = Series.objects.filter(title__icontains=query)
+    else:
+        tv_shows = Series.objects.all()
+    return render(request, 'streaming/series.html', {'tv_shows': tv_shows, 'query': query})
+
+
 def movies(request):
     movies_list = Movie.objects.all()
     return render(request, 'streaming/movies.html', {'movies': movies_list})
