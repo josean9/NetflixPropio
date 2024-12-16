@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Movie(models.Model):
+    tmdb_id = models.IntegerField(unique=True)
     title = models.CharField(max_length=255)
     description = models.TextField()
     release_date = models.DateField()
