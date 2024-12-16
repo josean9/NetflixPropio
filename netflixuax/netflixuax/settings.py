@@ -1,13 +1,18 @@
 from pathlib import Path
-
+import os
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+if os.getenv('VERCEL') is None:
+    load_dotenv()
 
-from decouple import config
 
 SECRET_KEY = 'mb37(y8)_s(j1=68eaqm1n$co(*m-fmsm$^y^9m77eq9_64n4&'
-TMDB_API_KEY = config('TMDB_API_KEY')
+TMDB_API_KEY = os.getenv('TMDB_API_KEY', '')
+# Verifica si todas las variables están definidas
+if not all([TMDB_API_KEY, SECRET_KEY]):
+    raise ValueError("Faltan variables de entorno necesarias para la configuración de Django.")
 
 
 
